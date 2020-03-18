@@ -3,6 +3,7 @@ import mocha from 'mocha';
 // eslint-disable-next-line no-unused-vars
 import should from 'should';
 import sinon from 'sinon';
+import proxyquire from 'proxyquire';
 
 import validator from '../../lib/validator';
 
@@ -20,6 +21,17 @@ describe('validator', () => {
     it('should return a function', () => {
       validator.noop = () => {};
       should(validator.validate('noop')).be.a.Function;
+    });
+
+    it('should be memoized', () => {
+      const noop = sinon.stub();
+      const memoize = sinon.spy(() => noop);
+      const validator = proxyquire('../../lib/validator', {
+        memoizejs: memoize,
+      });
+
+      should(memoize.calledOnce).be.true();
+      should(validator.validate).equal(noop());
     });
 
     describe('inner function', () => {
