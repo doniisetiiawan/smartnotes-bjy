@@ -62,10 +62,7 @@ app.get('/notes', usersAuthenticate, notesindex);
 app.post('/notes', usersAuthenticate, notescreate);
 app.get('/notes/:id', usersAuthenticate, notesshow);
 
-export default app;
+app.listen(config.port);
+console.log('(%s) app listening on port %s', app.get('env'), config.port);
 
-if (!module.parent) {
-  app.listen(config.port, () => console.log(
-    `Example app listening on port ${config.port}!`,
-  ));
-}
+export default app;
