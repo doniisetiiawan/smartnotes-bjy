@@ -1,0 +1,14 @@
+{
+  "development": {
+    "mongoUrl": "mongodb://localhost/smartnotes-bjy",
+    "port": 3000
+  },
+  "test": {
+    "mongoUrl": "mongodb://localhost/smartnotes-bjy",
+    "port": 3000
+  },
+  "production": {
+    "mongoUrl": "mongodb://localhost/smartnotes",
+    "port": 3000
+  }
+}
