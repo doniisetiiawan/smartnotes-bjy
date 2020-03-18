@@ -5,8 +5,9 @@ import mocha from 'mocha';
 
 import app from '../../server';
 import { setupDatabase, reset } from '../utils/db';
+import userx from '../fixtures/users.json';
 
-const user = require('../fixtures/users.json')[0];
+const user = userx[0];
 
 const {
   describe, it, before, after,

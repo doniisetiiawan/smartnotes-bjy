@@ -30,13 +30,16 @@
     "basic-auth-connect": "^1.0.0",
     "body-parser": "latest",
     "express": "^4.17.1",
+    "extend": "latest",
     "lodash": "^4.17.15",
     "memoizejs": "^0.1.1",
     "method-override": "^3.0.0",
     "mongoose": "^5.9.5",
     "mongoose-timestamp": "^0.6.0",
+    "ms": "latest",
     "passport-local-mongoose": "^6.0.1",
-    "validator": "^12.2.0",
-    "extend": "latest"
+    "ratelimiter": "^3.4.1",
+    "redis": "^3.0.2",
+    "validator": "^12.2.0"
   }
 }

@@ -2,6 +2,7 @@ import express from 'express';
 import methodOverride from 'method-override';
 import bodyParser from 'body-parser';
 
+import redis from 'redis';
 import User from './models/user';
 import Note from './models/note';
 import {
@@ -18,12 +19,22 @@ import {
 } from './routes/notes';
 
 import { connect } from './lib/db';
+// import limiter from './lib/rate-limiter';
+
+import configx from './config.json';
 
 const app = express();
-
-const config = require('./config.json')[app.get('env')];
+const config = configx[app.get('env')];
 
 connect(config.mongoUrl);
+
+// const db = redis.createClient();
+// 5000 requests, duration 1 day
+// const limiterx = limiter(
+//   connect(config.mongoUrl),
+//   5000,
+//   60 * 60 * 24,
+// );
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -61,8 +72,13 @@ app.patch(
 app.get('/notes', usersAuthenticate, notesindex);
 app.post('/notes', usersAuthenticate, notescreate);
 app.get('/notes/:id', usersAuthenticate, notesshow);
+// app.get('/notes/:id', limiterx, usersAuthenticate, notesshow);
 
 app.listen(config.port);
-console.log('(%s) app listening on port %s', app.get('env'), config.port);
+console.log(
+  '(%s) app listening on port %s',
+  app.get('env'),
+  config.port,
+);
 
 export default app;

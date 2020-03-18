@@ -5,9 +5,11 @@ import mocha from 'mocha';
 
 import app from '../../server';
 import { setupDatabase, reset } from '../utils/db';
+import userx from '../fixtures/users.json';
+import notex from '../fixtures/notes.json';
 
-const user = require('../fixtures/users.json')[0];
-const note = require('../fixtures/notes.json')[0];
+const user = userx[0];
+const note = notex[0];
 
 const {
   describe, it, before, after,
