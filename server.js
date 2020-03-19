@@ -1,8 +1,9 @@
 import express from 'express';
 import methodOverride from 'method-override';
 import bodyParser from 'body-parser';
+// import redis from 'redis';
+// import crypto from 'crypto';
 
-import redis from 'redis';
 import User from './models/user';
 import Note from './models/note';
 import {
@@ -59,6 +60,31 @@ app.use((req, res, next) => {
   next();
 });
 
+// const cacheAndServe = (req, res, next) => {
+//   res.cachable = (content) => {
+//     const stringContent = JSON.stringify(content);
+//
+//     const hash = crypto.createHash('md5');
+//     hash.update(stringContent);
+//     res.set({ ETag: hash.digest('hex') });
+//     if (req.fresh) {
+//       // remove content headers
+//       if (res._headers) {
+//         Object.keys(res._headers).forEach((header) => {
+//           if (header.indexOf('content') === 0) {
+//             res.removeHeader(header);
+//           }
+//         });
+//       }
+//       res.statusCode = 304;
+//       return res.end();
+//     }
+//     res.setHeader('Content-Type', 'application/json');
+//     res.end(stringContent);
+//   };
+//   next();
+// };
+
 app.get('/', (req, res) => res.send('Hello World!'));
 
 app.get('/users/:username', usersShow);
@@ -72,6 +98,7 @@ app.patch(
 app.get('/notes', usersAuthenticate, notesindex);
 app.post('/notes', usersAuthenticate, notescreate);
 app.get('/notes/:id', usersAuthenticate, notesshow);
+// app.get('/notes/:id', usersAuthenticate, cacheAndServe, notesshow);
 // app.get('/notes/:id', limiterx, usersAuthenticate, notesshow);
 
 app.listen(config.port);

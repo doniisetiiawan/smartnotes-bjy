@@ -20,6 +20,7 @@ export function show(req, res, next) {
       }
 
       res.send(note);
+      // res.cachable(note);
     },
   );
 }
