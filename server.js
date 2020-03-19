@@ -98,6 +98,7 @@ app.patch(
 app.get('/notes', usersAuthenticate, notesindex);
 app.post('/notes', usersAuthenticate, notescreate);
 app.get('/notes/:id', usersAuthenticate, notesshow);
+// app.get('/notes/:id.:format', usersAuthenticate, notesshow);
 // app.get('/notes/:id', usersAuthenticate, cacheAndServe, notesshow);
 // app.get('/notes/:id', limiterx, usersAuthenticate, notesshow);
 

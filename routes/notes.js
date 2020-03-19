@@ -1,4 +1,5 @@
 import _ from 'lodash';
+// import convert from 'xml-js';
 import { isValidationError } from '../lib/db';
 
 export function index(req, res, next) {
@@ -21,6 +22,17 @@ export function show(req, res, next) {
 
       res.send(note);
       // res.cachable(note);
+      // switch (req.params.format) {
+      //   case 'json':
+      //     res.send(note);
+      //     break;
+      //   case 'xml':
+      //     res.set('Content-Type', 'application/xml');
+      //     res.end(convert.json2xml(note));
+      //     break;
+      //   default:
+      //     res.status(400).send({ error: 'unknown format' });
+      // }
     },
   );
 }
